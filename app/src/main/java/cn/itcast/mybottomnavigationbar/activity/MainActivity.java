@@ -11,7 +11,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.ashokvarma.bottomnavigation.TextBadgeItem;
 
 import cn.itcast.mybottomnavigationbar.R;
-import cn.itcast.mybottomnavigationbar.adapter.MyFragmentAdapter;
+import cn.itcast.mybottomnavigationbar.adapter.MyBottomNavigationBarFragmentAdapter;
 
 /**
  * 使用谷歌的BottomNavigationBar导航栏时需导入：
@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationBar bottomNavigationBar;
     private FrameLayout fragment_content;
-    private MyFragmentAdapter mFragmentAdapter;
+    private MyBottomNavigationBarFragmentAdapter mFragmentAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationBar = (BottomNavigationBar) findViewById(R.id.bottom_navigation_bar);
 
         FragmentManager fm = getSupportFragmentManager();
-        mFragmentAdapter = new MyFragmentAdapter(fm);//适配器
+        mFragmentAdapter = new MyBottomNavigationBarFragmentAdapter(fm);//适配器
 
         initBottomNavigationBar();
         switchFragment(0);//默认显示第一项
@@ -59,17 +59,17 @@ public class MainActivity extends AppCompatActivity {
                 .setMode(BottomNavigationBar.MODE_FIXED)
                 .setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC)
                 //选中颜色（图标和文字）
-                .setActiveColor("#ffffff")
+                .setActiveColor("#FF279639")
                 //未选中颜色
-                .setInActiveColor("#A3CEC7")
+                .setInActiveColor("#aa666666")
                 //导航条背景色
-                .setBarBackgroundColor("#0E6858")
+                .setBarBackgroundColor("#ffebedf0")
                 //添加item
                 //单独设置item选中setActiveColor 与 未选中setInActiveColor颜色
-                .addItem(new BottomNavigationItem(R.drawable.apple_pic, "Like").setActiveColor("#FF0000").setInActiveColor("#cccccc"))
-                .addItem(new BottomNavigationItem(R.drawable.banana_pic, "Home").setBadgeItem(badge))//设置角标
-                .addItem(new BottomNavigationItem(R.drawable.cherry_pic, "Music"))
-                .addItem(new BottomNavigationItem(R.drawable.grape_pic, "TV"))
+                .addItem(new BottomNavigationItem(R.drawable.widget_bar_news_nor, "综合").setActiveColor("#FF0000").setInActiveColor("#aa666666"))
+                .addItem(new BottomNavigationItem(R.drawable.widget_bar_tweet_nor, "动弹").setBadgeItem(badge))//设置角标
+                .addItem(new BottomNavigationItem(R.drawable.widget_bar_explore_nor, "发现"))
+                .addItem(new BottomNavigationItem(R.drawable.widget_bar_me_nor, "我"))
                 .setFirstSelectedPosition(0)//设置默认选择的按钮，仅仅是显示而已
                 .initialise();//设置完成
 

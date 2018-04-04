@@ -1,106 +1,31 @@
 package cn.itcast.mybottomnavigationbar.fragment;
 
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import cn.itcast.mybottomnavigationbar.R;
+import cn.itcast.mybottomnavigationbar.adapter.ViewPagerAdapter;
+import cn.itcast.mybottomnavigationbar.fragment.fragment_viewPager.DefaultFragment;
+import cn.itcast.mybottomnavigationbar.utils.UIUtils;
 
 /**
- * A simple {@link Fragment} subclass.
+ * 动弹页
  */
-public class TwoFragment extends Fragment {
-
-
-    public static final String TAG = "TwoFragment";
-
-    public TwoFragment() {
-        // Required empty public constructor
-    }
-
+public class TwoFragment extends BasePagerFragment {
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        Log.d(TAG, "onCreateView: ");
-        return inflater.inflate(R.layout.fragment_two, container, false);
+    protected void addPageToAdapter(ViewPagerAdapter adapter) {
+        String[] titles = UIUtils.getStringArray(R.array.tweets_viewpage_arrays);
+        //传入1.SlidingTab标题、2.fragment、3.携带参数
+        adapter.addPage(titles[0], DefaultFragment.class, getBundle(0));
+        adapter.addPage(titles[1], DefaultFragment.class, getBundle(1));
+        adapter.addPage(titles[2], DefaultFragment.class, getBundle(2));
     }
 
-    //重写：解决重叠问题,硬性规定。（让每个类都重写，的方法就是修改基类）
-    @Override
-    public void setMenuVisibility(boolean menuVisible) {
-        super.setMenuVisibility(menuVisible);
-        View view = getView();//返回当前Fragment视图
-        if (view!=null){
-            view.setVisibility(menuVisible?View.VISIBLE:View.INVISIBLE);
-        }
+    private Bundle getBundle(int newType) {
+        Bundle bundle = new Bundle();
+        bundle.putInt(DefaultFragment.BUNDLE_KEY_CATALOG, newType);
+        bundle.putString("key", "我是动弹里的" + newType);
+        return bundle;
     }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        Log.d(TAG, "onAttach: ");
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.d(TAG, "onCreate: ");
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        Log.d(TAG, "onActivityCreated: ");
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        Log.d(TAG, "onStart: ");
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        Log.d(TAG, "onResume: ");
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        Log.d(TAG, "onPause: ");
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        Log.d(TAG, "onStop: ");
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        Log.d(TAG, "onDestroyView: ");
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Log.d(TAG, "onDestroy: ");
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        Log.d(TAG, "onDetach: ");
-    }
-
 }

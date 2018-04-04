@@ -1,64 +1,32 @@
 package cn.itcast.mybottomnavigationbar.fragment;
 
-
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Toast;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Unbinder;
 import cn.itcast.mybottomnavigationbar.R;
+import cn.itcast.mybottomnavigationbar.adapter.ViewPagerAdapter;
+import cn.itcast.mybottomnavigationbar.fragment.fragment_viewPager.DefaultFragment;
 import cn.itcast.mybottomnavigationbar.utils.UIUtils;
 
-public class OneFragment extends Fragment {
 
-    @BindView(R.id.btn_one)
-    Button mBtnOne;
-    Unbinder unbinder;
-    private FragmentActivity mActivity;
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_one, container, false);
-        unbinder = ButterKnife.bind(this, view);
-        return view;
-    }
-
-
-    //重写：解决重叠问题,硬性规定。（让每个类都重写的方法就是修改基类）
-    @Override
-    public void setMenuVisibility(boolean menuVisible) {
-        super.setMenuVisibility(menuVisible);
-        View view = getView();//返回当前Fragment视图
-        if (view != null) {
-            view.setVisibility(menuVisible ? View.VISIBLE : View.INVISIBLE);
-        }
-    }
-
+/**
+ * 综合页
+ */
+public class OneFragment extends BasePagerFragment {
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
+    protected void addPageToAdapter(ViewPagerAdapter adapter) {
+        String[] titles = UIUtils.getStringArray(R.array.news_viewpage_arrays);
+        //传入1.SlidingTab标题、2.fragment、3.携带参数
+        adapter.addPage(titles[0], DefaultFragment.class, getBundle(0));
+        adapter.addPage(titles[1], DefaultFragment.class, getBundle(1));
+        adapter.addPage(titles[2], DefaultFragment.class, getBundle(2));
+        adapter.addPage(titles[3], DefaultFragment.class, getBundle(3));
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mActivity = getActivity();
-    }
-
-    @OnClick(R.id.btn_one)
-    public void onViewClicked() {
-        Toast.makeText(mActivity,"你好",Toast.LENGTH_SHORT).show();
+    private Bundle getBundle(int newType) {
+        Bundle bundle = new Bundle();
+        bundle.putInt(DefaultFragment.BUNDLE_KEY_CATALOG, newType);
+        bundle.putString("key", "我是综合里的" + newType);
+        return bundle;
     }
 }

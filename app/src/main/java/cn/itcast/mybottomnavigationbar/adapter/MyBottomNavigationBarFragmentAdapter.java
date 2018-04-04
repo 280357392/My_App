@@ -10,9 +10,9 @@ import cn.itcast.mybottomnavigationbar.fragment.ThreeFragment;
 import cn.itcast.mybottomnavigationbar.fragment.TwoFragment;
 
 //Fragment 的适配器.
-public class MyFragmentAdapter extends FragmentPagerAdapter {
+public class MyBottomNavigationBarFragmentAdapter extends FragmentPagerAdapter {
 
-    public MyFragmentAdapter(FragmentManager fm) {
+    public MyBottomNavigationBarFragmentAdapter(FragmentManager fm) {
         super(fm);
     }
 
