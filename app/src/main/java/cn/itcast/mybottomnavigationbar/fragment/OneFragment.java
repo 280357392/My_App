@@ -1,34 +1,36 @@
 package cn.itcast.mybottomnavigationbar.fragment;
 
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 import cn.itcast.mybottomnavigationbar.R;
+import cn.itcast.mybottomnavigationbar.utils.UIUtils;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class OneFragment extends Fragment {
 
-    public static final String TAG = "OneFragment";
-
-    public OneFragment() {
-        // Required empty public constructor
-    }
-
+    @BindView(R.id.btn_one)
+    Button mBtnOne;
+    Unbinder unbinder;
+    private FragmentActivity mActivity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.d(TAG, "onCreateView: ");
-        return inflater.inflate(R.layout.fragment_one, container, false);
+        View view = inflater.inflate(R.layout.fragment_one, container, false);
+        unbinder = ButterKnife.bind(this, view);
+        return view;
     }
 
 
@@ -37,69 +39,26 @@ public class OneFragment extends Fragment {
     public void setMenuVisibility(boolean menuVisible) {
         super.setMenuVisibility(menuVisible);
         View view = getView();//返回当前Fragment视图
-        if (view!=null){
-            view.setVisibility(menuVisible?View.VISIBLE:View.INVISIBLE);
+        if (view != null) {
+            view.setVisibility(menuVisible ? View.VISIBLE : View.INVISIBLE);
         }
     }
 
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        Log.d(TAG, "onAttach: ");
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.d(TAG, "onCreate: ");
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Log.d(TAG, "onActivityCreated: ");
+        mActivity = getActivity();
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        Log.d(TAG, "onStart: ");
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        Log.d(TAG, "onResume: ");
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        Log.d(TAG, "onPause: ");
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        Log.d(TAG, "onStop: ");
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        Log.d(TAG, "onDestroyView: ");
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Log.d(TAG, "onDestroy: ");
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        Log.d(TAG, "onDetach: ");
+    @OnClick(R.id.btn_one)
+    public void onViewClicked() {
+        Toast.makeText(mActivity,"你好",Toast.LENGTH_SHORT).show();
     }
 }

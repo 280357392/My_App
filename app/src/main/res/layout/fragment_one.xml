@@ -5,12 +5,10 @@
     android:layout_height="match_parent"
     tools:context="cn.itcast.mybottomnavigationbar.fragment.OneFragment">
 
-
-    <EditText
-        android:id="@+id/editText"
+    <Button
+        android:id="@+id/btn_one"
+        android:text="按钮"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name" />
+        android:layout_height="wrap_content"/>
+
 </FrameLayout>
